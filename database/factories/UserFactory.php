@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -17,11 +18,24 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $password = Hash::make('tina2023'); // Default user password
+        // $etat_user = [false,true];
+        $gender = ['Masculin', 'Féminin'];
         return [
-            'name' => fake()->name(),
-            'email' => fake()->safeEmail(),
+            'name' => $this->faker->name,
+            'lastname' => $this->faker->lastName,
+            // 'email' => $this->faker->safeEmail,
+            'email' => 'admin01@gmail.com',
+            'code' => strtoupper(Str::random(10)),
+            'username'=>'ada',
+            // 'gender' => $gender[array_rand($gender)],
+            'gender' => 'Masculin',
+            'phone' => $this->faker->phoneNumber,
+            'address' =>$this->faker->address,
+            'role_id'=>2,
+            'is_active'=>false,
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => $password, // password
             'remember_token' => Str::random(10),
         ];
     }
